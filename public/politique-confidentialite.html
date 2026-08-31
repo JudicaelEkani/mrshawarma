@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de confidentialité — Mr. Shawarma</title>
+<link rel="icon" href="/icons/favicon-32.png" type="image/png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/plus-jakarta-sans@latest/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/anton@latest/index.css">
+<style>
+  :root {
+    --ink: #14110D; --ink-soft: #2B251C; --cream: #FFF8ED; --white: #FFFFFF;
+    --flame: #E2571F; --flame-dark: #B5411A; --gold: #D4A24C; --line: #EFE4D0; --text-dim: #6B6152;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink-soft); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.65; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+  header { margin-bottom: 32px; }
+  a.back { display: inline-block; margin-bottom: 20px; color: var(--flame-dark); font-weight: 700; font-size: 13px; text-decoration: none; }
+  a.back:hover { text-decoration: underline; }
+  h1 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 30px; color: var(--ink); margin: 0 0 6px; letter-spacing: .3px; }
+  .updated { font-size: 12.5px; color: var(--text-dim); margin: 0 0 28px; }
+  h2 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 18px; color: var(--flame-dark); margin: 34px 0 10px; letter-spacing: .2px; }
+  p, li { font-size: 14.5px; }
+  ul { padding-left: 20px; margin: 8px 0; }
+  li { margin-bottom: 6px; }
+  .card { background: var(--white); border-radius: 20px; padding: 24px 26px; box-shadow: 0 4px 14px rgba(20,17,13,.06); margin-bottom: 18px; }
+  .placeholder { background: #FFF3EA; border: 1px dashed var(--gold); border-radius: 8px; padding: 2px 8px; font-weight: 700; color: var(--flame-dark); }
+  footer { margin-top: 40px; font-size: 12px; color: var(--text-dim); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="/">← Retour à l'application</a>
+    <h1>Politique de confidentialité</h1>
+    <p class="updated">Dernière mise à jour : <span class="placeholder">à compléter (date de publication)</span></p>
+  </header>
+
+  <div class="card">
+    <p>Cette politique explique quelles données Mr. Shawarma collecte lorsque tu utilises l'application, pourquoi, et comment elles sont protégées. Nous ne vendons aucune donnée personnelle et n'affichons aucune publicité.</p>
+  </div>
+
+  <h2>1. Qui sommes-nous</h2>
+  <p>Mr. Shawarma est un service de commande et de livraison de shawarma opéré par <span class="placeholder">nom de l'entreprise / de l'exploitant à compléter</span>, basé à Douala, Cameroun. Pour toute question relative à tes données personnelles, contacte-nous à <span class="placeholder">email de contact à compléter</span>.</p>
+
+  <h2>2. Données que nous collectons</h2>
+  <p>Nous collectons uniquement les données nécessaires au fonctionnement du service :</p>
+  <ul>
+    <li><strong>Compte client</strong> : nom, adresse email, mot de passe (stocké de façon chiffrée — jamais en clair).</li>
+    <li><strong>Commandes</strong> : contenu du panier, personnalisations choisies, adresse de livraison, mode de paiement choisi (espèces, Orange Money ou MTN Mobile Money — nous ne collectons jamais de numéro de carte bancaire).</li>
+    <li><strong>Localisation</strong> : si tu utilises la géolocalisation ou que tu saisis une adresse, tes coordonnées approximatives sont utilisées pour calculer la distance de livraison. Cette recherche d'adresse est envoyée à des services cartographiques externes (OpenStreetMap / Nominatim, OSRM) pour trouver ta position et calculer l'itinéraire — voir section 5.</li>
+    <li><strong>Comptes livreur et administrateur</strong> : nom, email, mot de passe chiffré — créés uniquement par l'exploitant du service, pas par inscription libre.</li>
+    <li><strong>Données techniques de base</strong> : logs de connexion au serveur (adresse IP, horodatage) à des fins de sécurité, comme tout site web.</li>
+  </ul>
+  <p>Nous ne collectons <strong>jamais</strong> : numéro de carte bancaire, numéro de compte financier, ni aucune information sensible sans lien avec la commande.</p>
+
+  <h2>3. Pourquoi nous utilisons ces données</h2>
+  <ul>
+    <li>Créer et gérer ton compte client</li>
+    <li>Traiter, préparer et livrer tes commandes</li>
+    <li>Calculer les frais de livraison selon la distance</li>
+    <li>Permettre au livreur de te contacter et de te localiser pour la livraison</li>
+    <li>Générer des statistiques internes pour l'administrateur (chiffre d'affaires, nombre de commandes)</li>
+    <li>Assurer la sécurité du service (prévention de la fraude, des accès non autorisés)</li>
+  </ul>
+
+  <h2>4. Qui peut voir tes données</h2>
+  <p>Chaque rôle ne voit que ce qui le concerne :</p>
+  <ul>
+    <li><strong>Toi (client)</strong> : uniquement tes propres commandes</li>
+    <li><strong>Le livreur</strong> : les commandes actives, avec ton nom, ton adresse et ton numéro pour te livrer</li>
+    <li><strong>L'administrateur</strong> : l'ensemble des commandes et statistiques, pour la gestion du service</li>
+  </ul>
+  <p>Nous ne partageons, ne vendons et ne louons aucune donnée personnelle à des tiers à des fins commerciales ou publicitaires.</p>
+
+  <h2>5. Services externes utilisés</h2>
+  <p>Pour calculer les distances de livraison, l'application interroge deux services cartographiques gratuits et indépendants lorsque tu saisis une adresse ou utilises le GPS :</p>
+  <ul>
+    <li><strong>Nominatim (OpenStreetMap)</strong> — recherche et confirmation d'adresse</li>
+    <li><strong>OSRM</strong> — calcul de l'itinéraire routier</li>
+  </ul>
+  <p>Ces services reçoivent uniquement le texte de l'adresse recherchée ou les coordonnées GPS que tu fournis — jamais ton nom, ton email ou tes informations de commande. Ils disposent de leurs propres règles de confidentialité, indépendantes de Mr. Shawarma.</p>
+
+  <h2>6. Conservation des données</h2>
+  <p>Tes données sont conservées tant que ton compte reste actif. Tu peux demander la suppression de ton compte et de tes données à tout moment en nous contactant (voir section 1) ; nous y donnerons suite sauf obligation légale de conservation de certaines données de facturation.</p>
+
+  <h2>7. Sécurité</h2>
+  <p>Les mots de passe sont chiffrés (jamais stockés en clair). Les échanges entre l'application et nos serveurs sont protégés par chiffrement HTTPS. L'accès aux données est strictement limité selon le rôle de chaque utilisateur, contrôlé par notre serveur.</p>
+
+  <h2>8. Tes droits</h2>
+  <p>Tu peux à tout moment nous demander de :</p>
+  <ul>
+    <li>consulter les données que nous détenons sur toi</li>
+    <li>corriger une information inexacte</li>
+    <li>supprimer ton compte et tes données associées</li>
+  </ul>
+  <p>Pour exercer ces droits, contacte-nous à <span class="placeholder">email de contact à compléter</span>.</p>
+
+  <h2>9. Utilisation par des mineurs</h2>
+  <p>Ce service n'est pas destiné aux enfants de moins de 16 ans. Nous ne collectons pas sciemment de données concernant des mineurs.</p>
+
+  <h2>10. Modifications de cette politique</h2>
+  <p>Cette politique peut être mise à jour pour refléter des évolutions du service ou de la réglementation. La date de dernière mise à jour est indiquée en haut de cette page.</p>
+
+  <footer>
+    Mr. Shawarma — Douala, Cameroun<br>
+    <span class="placeholder">coordonnées de contact complètes à ajouter</span>
+  </footer>
+</div>
+</body>
+</html>

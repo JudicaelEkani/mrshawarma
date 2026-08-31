@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr. Shawarma — Le secret c'est la sauce</title>
+<meta name="description" content="Commande ton shawarma préféré à Douala, livré chaud jusqu'à ta porte.">
+<meta name="theme-color" content="#E2571F">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icons/favicon-32.png" type="image/png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/plus-jakarta-sans@latest/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/anton@latest/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/space-mono@latest/index.css">
+<style>
+:root {
+  --ink: #14110D; --ink-soft: #2B251C; --cream: #FFF8ED; --white: #FFFFFF;
+  --flame: #E2571F; --flame-dark: #B5411A; --gold: #D4A24C; --sage: #7C8F52;
+  --line: #EFE4D0; --text-dim: #8A7F6C;
+  --shadow-sm: 0 4px 14px rgba(20,17,13,.08); --shadow-md: 0 14px 34px rgba(20,17,13,.16);
+  --r-xl: 32px; --r-lg: 24px; --r-md: 18px; --r-sm: 12px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; } }
+body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--ink); color: var(--ink); -webkit-tap-highlight-color: transparent; }
+.phone { max-width: 440px; min-height: 100vh; margin: 0 auto; background: var(--cream); position: relative; padding-bottom: 110px; overflow-x: hidden; }
+.screen { animation: fadeIn .25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+button { font-family: inherit; cursor: pointer; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* ---------- CONNEXION ---------- */
+.login-wrap { min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; padding: 30px 24px; background: var(--ink) url("https://image.qwenlm.ai/public_source/73fa3186-391c-41d4-9abb-8b9000633c99/1175263a1-8e7d-477d-af33-82e3de89347c.png") center 40%/cover no-repeat; }
+.login-wrap::before { content: ""; position: absolute; inset: 0; background: rgba(20,17,13,.72); }
+.login-card { position: relative; z-index: 1; width: 100%; background: var(--white); border-radius: var(--r-xl); padding: 28px 20px; box-shadow: var(--shadow-md); text-align: center; }
+.login-logo { transform: none; margin-bottom: 10px; }
+.login-wordmark { color: var(--ink); font-family: 'Anton', sans-serif; font-weight: 400; font-size: 26px; margin: 0 0 2px; }
+.login-tagline { color: var(--flame-dark); font-size: 12px; font-style: italic; margin: 0 0 18px; }
+.login-tabs { display: flex; background: var(--cream); border-radius: 999px; padding: 4px; margin-bottom: 16px; }
+.login-tab { flex: 1; border: none; background: transparent; padding: 10px; border-radius: 999px; font-size: 12.5px; font-weight: 800; color: var(--text-dim); }
+.login-tab.active { background: var(--ink); color: var(--cream); }
+.login-mode-switch { font-size: 11.5px; color: var(--text-dim); margin: 0 0 12px; }
+.login-mode-switch button { background: none; border: none; color: var(--flame-dark); font-weight: 800; padding: 0; text-decoration: underline; }
+.login-card input { width: 100%; border: none; background: var(--cream); border-radius: var(--r-sm); padding: 14px; font-size: 14px; font-family: inherit; font-weight: 600; margin-bottom: 10px; }
+.login-error { color: var(--flame-dark); font-size: 11px; font-weight: 700; min-height: 15px; margin: 2px 0 10px; }
+.login-hint { font-size: 10.5px; color: var(--text-dim); margin: 4px 0 0; line-height: 1.5; }
+
+/* ---------- ACCUEIL ---------- */
+.hero { position: relative; color: var(--cream); padding: 40px 24px 34px; min-height: 440px; display: flex; flex-direction: column; justify-content: flex-end; background: var(--ink) url("https://image.qwenlm.ai/public_source/73fa3186-391c-41d4-9abb-8b9000633c99/1175263a1-8e7d-477d-af33-82e3de89347c.png") center 62%/cover no-repeat; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,17,13,.30) 0%, rgba(20,17,13,.55) 55%, rgba(20,17,13,.93) 100%); }
+.ember-field { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
+.ember { position: absolute; bottom: -10px; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 6px 2px rgba(212,162,76,.7); animation: emberRise linear infinite; }
+@keyframes emberRise { 0% { transform: translateY(0) translateX(0); opacity: 0; } 10% { opacity: .9; } 90% { opacity: .4; } 100% { transform: translateY(-260px) translateX(var(--drift, 10px)); opacity: 0; } }
+.hero-top { position: relative; z-index: 2; text-align: center; margin-top: auto; }
+.logo-stamp { width: 88px; height: 88px; margin: 0 auto 12px; background: var(--white); border-radius: 50%; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; transform: rotate(-6deg); overflow: hidden; }
+.logo-img { width: 84%; height: 84%; object-fit: contain; border-radius: 50%; }
+.wordmark { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 32px; letter-spacing: .5px; margin: 2px 0 4px; color: var(--cream); text-shadow: 0 4px 18px rgba(0,0,0,.5); }
+.tagline { margin: 0; font-size: 13px; color: var(--gold); font-style: italic; }
+.home-body { position: relative; padding: 26px 24px 0; text-align: center; }
+.home-hello { margin: 0 0 6px; font-size: 13px; font-weight: 800; color: var(--flame-dark); }
+.home-line { color: var(--ink-soft); font-size: 14px; line-height: 1.5; margin: 0 10px 22px; }
+.loc-status { text-align: center; font-size: 11px; color: var(--text-dim); min-height: 16px; margin-top: 12px; padding: 0 24px; }
+.btn-primary { display: block; width: 100%; background: var(--flame); color: var(--white); border: none; padding: 17px; border-radius: 999px; font-size: 15px; font-weight: 700; letter-spacing: .2px; box-shadow: 0 10px 24px rgba(226,87,31,.35); transition: transform .12s ease; }
+.btn-primary:active { transform: scale(.97); }
+.btn-primary:disabled { opacity: .55; }
+.btn-secondary { display: block; width: 100%; background: var(--white); color: var(--ink); border: none; padding: 14px; border-radius: 999px; font-size: 13.5px; font-weight: 700; margin-top: 10px; box-shadow: var(--shadow-sm); }
+
+/* ---------- TOPBAR / DIVERS ---------- */
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 20px 20px 6px; }
+.topbar h2 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 22px; letter-spacing: .4px; margin: 0; color: var(--ink); }
+.icon-btn { background: var(--white); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); }
+.icon-btn svg { width: 16px; height: 16px; fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.icon-btn.placeholder { visibility: hidden; }
+.section-label { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 19px; letter-spacing: .4px; margin: 14px 20px 12px; color: var(--ink); }
+.screen-hint { font-size: 11px; color: var(--text-dim); margin: 0; padding: 0 20px 12px; line-height: 1.5; }
+
+/* ---------- CATEGORIES / PRODUITS ---------- */
+.category-grid { display: flex; gap: 14px; padding: 8px 20px 16px; overflow-x: auto; }
+.category-chip { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; background: transparent; border: none; padding: 2px; }
+.category-chip .chip-ring { width: 64px; height: 64px; border-radius: 28px; display: flex; align-items: center; justify-content: center; background: var(--white); box-shadow: var(--shadow-sm); transition: background .18s ease, transform .12s ease, box-shadow .18s ease; }
+.category-chip .chip-ring svg { width: 28px; height: 28px; stroke: var(--ink); fill: none; stroke-width: 1.7; }
+.category-chip.active .chip-ring { background: var(--flame); box-shadow: 0 10px 22px rgba(226,87,31,.35); transform: translateY(-3px) rotate(-3deg); }
+.category-chip.active .chip-ring svg { stroke: var(--white); }
+.category-chip span.chip-label { font-size: 12px; font-weight: 700; color: var(--ink-soft); }
+.product-list { padding: 0 20px; display: flex; flex-direction: column; gap: 14px; }
+.product-card { display: flex; gap: 14px; align-items: center; background: var(--white); border-radius: var(--r-lg); padding: 14px; box-shadow: var(--shadow-sm); }
+.product-thumb { width: 56px; height: 56px; border-radius: 20px; background: linear-gradient(145deg, #FFE9D6, #FFD9B8); flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
+.product-thumb svg { width: 26px; height: 26px; stroke: var(--flame-dark); fill: none; stroke-width: 1.8; }
+.product-info { flex: 1; }
+.product-info h4 { margin: 0 0 3px; font-size: 15px; }
+.product-info p { margin: 0; font-size: 12px; color: var(--text-dim); }
+.product-price { font-weight: 800; color: var(--flame-dark); font-size: 13.5px; margin-top: 5px; }
+.product-add { background: var(--ink); color: var(--cream); border: none; width: 36px; height: 36px; border-radius: 14px; font-size: 19px; flex: 0 0 auto; line-height: 1; box-shadow: var(--shadow-sm); }
+
+/* ---------- PERSONNALISATION ---------- */
+.customize-body { padding: 4px 20px 24px; display: flex; flex-direction: column; gap: 22px; }
+.opt-group { background: var(--white); border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow-sm); }
+.opt-group h4 { font-size: 13.5px; margin: 0 0 12px; letter-spacing: .2px; color: var(--ink-soft); }
+.pill-row { display: flex; gap: 9px; flex-wrap: wrap; }
+.pill { border: none; background: var(--cream); border-radius: 999px; padding: 9px 16px; font-size: 13px; font-weight: 700; }
+.pill.selected { background: var(--ink); color: var(--cream); }
+.check-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; }
+.check-row input { width: 19px; height: 19px; accent-color: var(--sage); }
+.check-row label { font-size: 14px; }
+.slider-wrap { display: flex; align-items: center; gap: 12px; }
+.slider-wrap input[type=range] { flex: 1; accent-color: var(--flame); height: 4px; }
+.slider-flames { font-size: 13px; min-width: 78px; text-align: right; font-weight: 700; color: var(--flame-dark); }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; }
+.switch { position: relative; width: 46px; height: 26px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider-toggle { position: absolute; inset: 0; background: var(--line); border-radius: 999px; transition: .2s; }
+.slider-toggle::before { content: ""; position: absolute; width: 20px; height: 20px; left: 3px; top: 3px; background: var(--white); border-radius: 50%; transition: .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.switch input:checked + .slider-toggle { background: var(--sage); }
+.switch input:checked + .slider-toggle::before { transform: translateX(20px); }
+.bottom-cta { position: sticky; bottom: 16px; background: var(--cream); padding: 14px 20px 4px; z-index: 5; }
+.qty-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-weight: 700; font-size: 13.5px; }
+.stepper { display: flex; align-items: center; gap: 16px; background: var(--white); border-radius: 999px; padding: 4px 8px; box-shadow: var(--shadow-sm); }
+.stepper-btn { width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--ink); color: var(--cream); font-size: 16px; }
+#qty-value { min-width: 16px; text-align: center; font-weight: 800; }
+
+/* ---------- PANIER ---------- */
+.cart-items { padding: 10px 20px; display: flex; flex-direction: column; gap: 12px; }
+.cart-item { background: var(--white); border-radius: var(--r-lg); padding: 14px; display: flex; gap: 12px; align-items: flex-start; box-shadow: var(--shadow-sm); }
+.cart-item-body { flex: 1; }
+.cart-item-body strong { font-size: 14px; }
+.cart-item-body p { margin: 4px 0 0; font-size: 11.5px; color: var(--text-dim); line-height: 1.5; }
+.cart-item-price { font-weight: 800; color: var(--flame-dark); font-size: 13px; margin-top: 6px; }
+.cart-item-remove { background: var(--cream); border: none; color: var(--flame-dark); font-size: 11px; font-weight: 700; padding: 6px 10px; border-radius: 999px; margin-top: 8px; }
+.empty-cart { text-align: center; padding: 50px 30px; color: var(--text-dim); }
+.empty-cart .btn-secondary { max-width: 240px; margin: 16px auto 0; }
+.delivery-box { margin: 14px 20px 0; background: var(--white); border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow-sm); }
+.delivery-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.delivery-head span { font-size: 12.5px; font-weight: 800; }
+.loc-btn { background: var(--cream); border: none; border-radius: 999px; padding: 9px 12px; font-size: 11.5px; font-weight: 700; flex: 1; }
+.delivery-box label { font-size: 11px; font-weight: 700; display: block; margin: 10px 0 6px; color: var(--text-dim); }
+.delivery-box textarea { width: 100%; border: none; background: var(--cream); border-radius: var(--r-sm); padding: 12px 14px; font-family: inherit; font-size: 13px; font-weight: 600; min-height: 76px; resize: vertical; }
+.delivery-box input { width: 100%; border: none; background: var(--cream); border-radius: var(--r-sm); padding: 12px 14px; font-size: 15px; font-family: inherit; font-weight: 700; }
+.delivery-actions { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.delivery-box .loc-status { padding: 0; margin-top: 10px; min-height: 14px; }
+.delivery-hint { font-size: 10.5px; color: var(--text-dim); margin: 8px 0 0; line-height: 1.5; }
+.maps-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 800; color: var(--flame-dark); text-decoration: none; }
+.ticket { margin: 16px 20px 0; background: var(--white); border-radius: var(--r-lg); padding: 18px; box-shadow: var(--shadow-md); }
+.summary-row { display: flex; justify-content: space-between; font-size: 13.5px; padding: 6px 0; color: var(--ink-soft); }
+.promo-row { color: var(--sage); font-weight: 800; }
+#sum-distance { font-size: 10px; color: var(--text-dim); margin-left: 4px; }
+.ticket-divider { border-top: 2px dashed var(--line); margin: 4px 0; }
+.summary-row.total { font-size: 17px; font-weight: 800; color: var(--ink); padding-top: 8px; }
+.promo-hint { font-size: 10.5px; color: var(--text-dim); margin: 10px 0 0; }
+.ticket .btn-primary { margin-top: 14px; }
+.cash-note { font-size: 10.5px; color: var(--text-dim); margin: 10px 0 0; text-align: center; }
+
+/* ---------- SUIVI ---------- */
+.tracking-body { padding: 4px 24px 20px; }
+.no-order { text-align: center; padding: 70px 20px; color: var(--text-dim); }
+.no-order .btn-primary { max-width: 240px; margin: 16px auto 0; }
+.order-ref { font-size: 12px; color: var(--text-dim); margin: 0 0 6px; }
+.order-address { font-size: 11.5px; color: var(--ink-soft); line-height: 1.5; margin: 0 0 6px; }
+.tracker { position: relative; padding-left: 4px; margin-top: 16px; }
+.track-step { display: flex; gap: 16px; padding-bottom: 28px; position: relative; }
+.track-step::before { content: ""; position: absolute; left: 17px; top: 38px; bottom: -4px; width: 2px; background: var(--line); }
+.track-step:last-child::before { display: none; }
+.track-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--white); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.track-dot svg { width: 16px; height: 16px; stroke: var(--line); fill: none; stroke-width: 2.4; opacity: 0; transition: opacity .2s; }
+.track-info strong { display: block; font-size: 14px; }
+.track-info span { font-size: 12px; color: var(--text-dim); }
+.track-step.done .track-dot { background: var(--sage); }
+.track-step.done .track-dot svg { stroke: var(--white); opacity: 1; }
+.track-step.current .track-dot { background: var(--flame); animation: pulseDot 1.4s ease-in-out infinite; }
+@keyframes pulseDot { 0%,100% { box-shadow: 0 0 0 0 rgba(226,87,31,.35); } 50% { box-shadow: 0 0 0 10px rgba(226,87,31,0); } }
+.tracking-note { font-size: 11px; color: var(--text-dim); margin-top: 12px; line-height: 1.5; }
+
+/* ---------- LIVREUR / ADMIN ---------- */
+.list-wrap { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 12px; }
+.order-card { background: var(--white); border-radius: var(--r-lg); padding: 14px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 7px; }
+.order-card-head { display: flex; justify-content: space-between; align-items: center; }
+.order-card-head strong { font-family: 'Space Mono', monospace; font-size: 14px; }
+.order-card p { margin: 0; font-size: 11.5px; color: var(--text-dim); line-height: 1.5; }
+.status-badge { padding: 4px 10px; border-radius: 999px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .4px; }
+.status-received { background: #FFF0BE; color: #8A6D1A; }
+.status-preparing { background: #FFE3C4; color: var(--flame-dark); }
+.status-delivering { background: #E3ECF7; color: #2B5EA7; }
+.status-delivered { background: #E5EDD8; color: var(--sage); }
+.btn-action { background: var(--ink); color: var(--cream); border: none; border-radius: 999px; padding: 12px; font-weight: 700; font-size: 12.5px; margin-top: 4px; }
+.btn-action:active { transform: scale(.97); }
+.admin-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px 6px; }
+.stat-card { background: var(--white); border-radius: var(--r-lg); padding: 14px; box-shadow: var(--shadow-sm); }
+.stat-card strong { font-size: 19px; display: block; font-family: 'Space Mono', monospace; color: var(--ink); }
+.stat-card span { font-size: 10px; color: var(--text-dim); font-weight: 800; text-transform: uppercase; letter-spacing: .4px; }
+
+/* ---------- NAV DU BAS ---------- */
+.bottom-nav { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); max-width: 400px; background: var(--ink); border-radius: 999px; display: flex; justify-content: space-around; padding: 10px 6px; box-shadow: 0 16px 34px rgba(20,17,13,.35); z-index: 10; }
+.nav-btn { background: none; border: none; color: #8A7F6C; position: relative; padding: 7px 10px; border-radius: 999px; transition: background .15s ease, color .15s ease; }
+.nav-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; display: block; }
+.nav-btn.active { color: var(--ink); background: var(--gold); }
+.cart-badge { position: absolute; top: -2px; right: 2px; background: var(--flame); color: var(--white); font-size: 10px; font-weight: 700; min-width: 16px; height: 16px; border-radius: 999px; display: flex; align-items: center; justify-content: center; padding: 0 3px; }
+.toast { position: fixed; left: 50%; bottom: 100px; transform: translateX(-50%); background: var(--ink); color: var(--cream); padding: 10px 18px; border-radius: 999px; font-size: 12.5px; font-weight: 700; box-shadow: var(--shadow-md); z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s ease; max-width: 88%; text-align: center; }
+.toast.show { opacity: 1; }
+@media (max-width: 380px) { .wordmark { font-size: 26px; } }
+
+/* ---------- MODE DE PAIEMENT ---------- */
+.payment-methods { display: flex; flex-direction: column; gap: 8px; }
+.payment-option { display: flex; align-items: center; gap: 10px; background: var(--cream); border: 2px solid transparent; border-radius: var(--r-md); padding: 12px 14px; text-align: left; font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+.payment-option.selected { border-color: var(--flame); background: #FFF3EA; color: var(--ink); }
+.payment-option .payment-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--line); flex: 0 0 auto; position: relative; }
+.payment-option.selected .payment-radio { border-color: var(--flame); }
+.payment-option.selected .payment-radio::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--flame); }
+.deposit-box { margin-top: 6px; background: #FFF8ED; border: 1px dashed var(--gold); border-radius: var(--r-md); padding: 12px 14px; font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
+.deposit-box strong { color: var(--flame-dark); font-family: 'Space Mono', monospace; font-size: 14px; }
+
+/* ---------- CONFIRMATION DE RÉCEPTION (client) ---------- */
+.confirm-banner { margin: 16px 20px 0; background: linear-gradient(135deg, #FFF3EA, #FFE9D6); border: 1px solid var(--gold); border-radius: var(--r-lg); padding: 16px; text-align: center; }
+.confirm-banner p { margin: 0 0 12px; font-size: 13px; color: var(--ink-soft); font-weight: 700; }
+.confirm-banner .btn-primary { box-shadow: 0 10px 20px rgba(124,143,82,.35); background: var(--sage); }
+.wait-banner { margin: 16px 20px 0; background: var(--white); border-radius: var(--r-lg); padding: 14px 16px; text-align: center; font-size: 12.5px; color: var(--text-dim); font-weight: 700; box-shadow: var(--shadow-sm); }
+
+/* ---------- BANNIÈRE DE RÔLE (livreur / admin) ---------- */
+.role-banner { position: relative; padding: 26px 20px 22px; color: var(--cream); overflow: hidden; }
+.role-banner.livreur { background: linear-gradient(135deg, #2B5EA7, #1E3F73); }
+.role-banner.admin { background: linear-gradient(135deg, var(--ink), #3A2F22); }
+.role-banner-top { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+.role-banner-icon { width: 44px; height: 44px; border-radius: 16px; background: rgba(255,255,255,.16); display: flex; align-items: center; justify-content: center; }
+.role-banner-icon svg { width: 22px; height: 22px; stroke: var(--cream); fill: none; stroke-width: 1.8; }
+.role-banner h2 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 22px; margin: 14px 0 2px; letter-spacing: .3px; }
+.role-banner p { margin: 0; font-size: 12px; opacity: .82; line-height: 1.5; }
+.role-banner .icon-btn { background: rgba(255,255,255,.16); box-shadow: none; }
+.role-banner .icon-btn svg { stroke: var(--cream); }
+
+/* ---------- LISTE COMMANDES (livreur / admin) — redesign ---------- */
+.list-wrap { padding: 4px 20px 20px; display: flex; flex-direction: column; gap: 14px; margin-top: -14px; position: relative; z-index: 2; }
+.order-card { border-left: 5px solid var(--line); }
+.order-card.st-received { border-left-color: #D4A24C; }
+.order-card.st-preparing { border-left-color: var(--flame); }
+.order-card.st-delivering { border-left-color: #2B5EA7; }
+.order-card.st-client_confirmed { border-left-color: #7C4FA0; }
+.order-card.st-delivered { border-left-color: var(--sage); }
+.status-client_confirmed { background: #EDE3F5; color: #7C4FA0; }
+.payment-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; padding: 3px 9px; border-radius: 999px; background: var(--cream); color: var(--ink-soft); width: fit-content; }
+.admin-stats { margin-top: -14px; position: relative; z-index: 2; }
+.stat-card { border-top: 3px solid var(--gold); }
+.new-order-pulse { animation: newOrderPulse 1.6s ease-in-out 2; }
+@keyframes newOrderPulse { 0%,100% { box-shadow: var(--shadow-sm); } 50% { box-shadow: 0 0 0 6px rgba(226,87,31,.25); } }
+
+/* ---------- SUGGESTIONS D'ADRESSE ---------- */
+.address-suggestions { display: flex; flex-direction: column; gap: 0; margin-top: 6px; background: var(--white); border-radius: var(--r-sm); box-shadow: var(--shadow-sm); overflow: hidden; }
+.address-suggestion-item { display: block; width: 100%; text-align: left; background: none; border: none; border-bottom: 1px solid var(--line); padding: 10px 12px; font-size: 11.5px; line-height: 1.4; color: var(--ink-soft); }
+.address-suggestion-item:last-child { border-bottom: none; }
+.address-suggestion-item:active { background: var(--cream); }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- ============ CONNEXION ============ -->
+  <section class="screen" data-screen="login" hidden>
+    <div class="login-wrap">
+      <div class="login-card">
+        <div class="logo-stamp login-logo"><img class="logo-img" src="https://image.qwenlm.ai/public_source/73fa3186-391c-41d4-9abb-8b9000633c99/1c7383841-c10f-4e37-9062-15aab03c8ae5.png" alt="Logo Mr. Shawarma"></div>
+        <h1 class="login-wordmark">MR. SHAWARMA</h1>
+        <p class="login-tagline">Le secret c'est la sauce</p>
+
+        <div class="login-tabs">
+          <button class="login-tab active" data-login-tab="client">Client</button>
+          <button class="login-tab" data-login-tab="staff">Livreur / Admin</button>
+        </div>
+
+        <!-- Onglet client -->
+        <div id="login-panel-client">
+          <input id="login-name" type="text" placeholder="Ton nom" autocomplete="name">
+          <input id="login-email" type="email" placeholder="Ton email" autocomplete="email">
+          <input id="login-password" type="password" placeholder="Mot de passe" autocomplete="current-password">
+          <p class="login-mode-switch"><span id="client-mode-text">Déjà un compte ?</span> <button id="client-mode-toggle">Se connecter</button></p>
+        </div>
+
+        <!-- Onglet personnel (livreur / admin) -->
+        <div id="login-panel-staff" hidden>
+          <input id="staff-email" type="email" placeholder="Email du compte" autocomplete="email">
+          <input id="staff-password" type="password" placeholder="Mot de passe" autocomplete="current-password">
+          <p class="login-hint">Comptes créés par l'administrateur système (voir README du backend).</p>
+        </div>
+
+        <p class="login-error" id="login-error"></p>
+        <button class="btn-primary" id="login-btn">Continuer</button>
+        <p class="login-hint" style="margin-top:14px"><a href="/politique-confidentialite.html" style="color:inherit;">Politique de confidentialité</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACCUEIL (client) ============ -->
+  <section class="screen" data-screen="home" hidden>
+    <header class="hero">
+      <div class="hero-overlay"></div>
+      <div class="ember-field" id="ember-field"></div>
+      <button class="icon-btn" id="logout-btn-home" style="position:absolute;top:16px;right:16px;z-index:3" aria-label="Déconnexion">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      </button>
+      <div class="hero-top">
+        <div class="logo-stamp"><img class="logo-img" src="https://image.qwenlm.ai/public_source/73fa3186-391c-41d4-9abb-8b9000633c99/1c7383841-c10f-4e37-9062-15aab03c8ae5.png" alt="Logo Mr. Shawarma"></div>
+        <h1 class="wordmark">MR. SHAWARMA</h1>
+        <p class="tagline">Le secret c'est la sauce</p>
+      </div>
+    </header>
+    <div class="home-body">
+      <p class="home-hello" id="home-hello"></p>
+      <p class="home-line">Grillé minute, sauce maison, livré chaud jusqu'à ta porte.</p>
+      <button class="btn-primary" data-nav="menu">Voir le menu</button>
+    </div>
+  </section>
+
+  <!-- ============ MENU ============ -->
+  <section class="screen" data-screen="menu" hidden>
+    <div class="topbar">
+      <button class="icon-btn" data-nav="home" aria-label="Accueil"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
+      <h2>Menu</h2>
+      <button class="icon-btn" data-nav="cart" aria-label="Panier"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></button>
+    </div>
+    <div class="category-grid" id="category-grid"></div>
+    <h3 class="section-label" id="products-title">Nos produits</h3>
+    <div class="product-list" id="product-list"></div>
+  </section>
+
+  <!-- ============ PERSONNALISATION ============ -->
+  <section class="screen" data-screen="customize" hidden>
+    <div class="topbar">
+      <button class="icon-btn" data-nav="menu" aria-label="Retour"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <h2 id="customize-title">Personnaliser</h2>
+      <button class="icon-btn placeholder" aria-hidden="true"></button>
+    </div>
+    <div class="customize-body" id="customize-body"></div>
+    <div class="bottom-cta">
+      <div class="qty-row">
+        <span>Quantité</span>
+        <div class="stepper">
+          <button class="stepper-btn" id="qty-minus" aria-label="Diminuer">−</button>
+          <span id="qty-value">1</span>
+          <button class="stepper-btn" id="qty-plus" aria-label="Augmenter">+</button>
+        </div>
+      </div>
+      <button class="btn-primary" id="add-to-cart-btn">Ajouter · <span id="item-total-price">0</span> FCFA</button>
+    </div>
+  </section>
+
+  <!-- ============ PANIER ============ -->
+  <section class="screen" data-screen="cart" hidden>
+    <div class="topbar">
+      <button class="icon-btn" data-nav="menu" aria-label="Retour"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <h2>Mon panier</h2>
+      <button class="icon-btn placeholder" aria-hidden="true"></button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="empty-cart" id="empty-cart" hidden>
+      <p>Ton panier est vide.</p>
+      <button class="btn-secondary" data-nav="menu">Voir le menu</button>
+    </div>
+    <div class="delivery-box" id="delivery-box">
+      <div class="delivery-head"><span>Livraison</span><button class="loc-btn" id="locate-btn" style="flex:0 0 auto">📍 Ma position GPS</button></div>
+      <label for="address-input">Ta position détaillée (pour te retrouver facilement sur Google Maps)</label>
+      <textarea id="address-input" placeholder="Ex : Bonapriso, rue Joffre, immeuble jaune face pharmacie, portail vert, 2e étage…"></textarea>
+      <div class="address-suggestions" id="address-suggestions" hidden></div>
+      <div class="delivery-actions">
+        <button class="loc-btn" id="geocode-btn">🧮 Calculer la distance</button>
+        <a class="maps-link" id="maps-link" target="_blank" rel="noopener" hidden>🗺️ Itinéraire Google Maps</a>
+      </div>
+      <p class="loc-status" id="loc-status-cart"></p>
+      <p class="delivery-hint">Distance calculée par itinéraire routier réel (à défaut, estimation) · Moins de 1 km : GRATUIT · dès 1 km : 33 FCFA + 50 FCFA/km supplémentaire<br>Départ du livreur : Hôpital Général de Douala</p>
+    </div>
+    <div class="delivery-box" id="payment-box">
+      <div class="delivery-head"><span>Mode de paiement</span></div>
+      <div class="payment-methods" id="payment-methods"></div>
+      <div class="deposit-box" id="deposit-box" hidden></div>
+    </div>
+    <div class="ticket" id="cart-summary">
+      <div class="summary-row"><span>Sous-total</span><span id="sum-subtotal">0 FCFA</span></div>
+      <div class="summary-row promo-row" id="row-promo" hidden><span id="sum-promo-label">Shawarma offert 🎁</span><span id="sum-promo">−0 FCFA</span></div>
+      <div class="summary-row"><span>Livraison</span><span><span id="sum-delivery">— FCFA</span><span id="sum-distance"></span></span></div>
+      <div class="ticket-divider"></div>
+      <div class="summary-row total"><span>Total</span><span id="sum-total">0 FCFA</span></div>
+      <p class="promo-hint" id="promo-hint">🎁 1 shawarma offert dès 10 shawarmas achetés</p>
+      <button class="btn-primary" id="checkout-btn">Commander</button>
+      <p class="cash-note" id="cash-note">Paiement en espèces à la livraison.</p>
+    </div>
+  </section>
+
+  <!-- ============ SUIVI CLIENT ============ -->
+  <section class="screen" data-screen="tracking" hidden>
+    <div class="topbar">
+      <button class="icon-btn placeholder" aria-hidden="true"></button>
+      <h2>Suivi</h2>
+      <button class="icon-btn placeholder" aria-hidden="true"></button>
+    </div>
+    <div class="tracking-body">
+      <div class="no-order" id="no-order">
+        <p>Aucune commande en cours.</p>
+        <button class="btn-primary" data-nav="menu">Commander</button>
+      </div>
+      <div id="order-tracking-content" hidden>
+        <p class="order-ref">Commande <span id="order-ref-number">#0000</span> · passée à <span id="order-time">—</span></p>
+        <p class="order-address" id="order-address"></p>
+        <a class="maps-link" id="order-maps-link" target="_blank" rel="noopener" hidden>🗺️ Voir mon adresse sur Google Maps</a>
+        <div class="tracker">
+          <div class="track-step" data-step="1"><span class="track-dot"><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg></span><div class="track-info"><strong>Commande reçue</strong><span>Confirmée par le restaurant</span></div></div>
+          <div class="track-step" data-step="2"><span class="track-dot"><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg></span><div class="track-info"><strong>Préparation</strong><span>Ça grille sur la plaque</span></div></div>
+          <div class="track-step" data-step="3"><span class="track-dot"><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg></span><div class="track-info"><strong>En livraison</strong><span>Le livreur est en route</span></div></div>
+          <div class="track-step" data-step="4"><span class="track-dot"><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg></span><div class="track-info"><strong>Reçue par toi</strong><span>Tu as confirmé la réception</span></div></div>
+          <div class="track-step" data-step="5"><span class="track-dot"><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg></span><div class="track-info"><strong>Livrée</strong><span>Bon appétit 🎉</span></div></div>
+        </div>
+        <div class="confirm-banner" id="confirm-banner" hidden>
+          <p>Le livreur indique être arrivé — as-tu bien reçu ta commande ?</p>
+          <button class="btn-primary" id="confirm-receipt-btn">✅ J'ai reçu ma commande</button>
+        </div>
+        <div class="wait-banner" id="wait-banner" hidden>⏳ En attente de la confirmation finale du livreur…</div>
+        <p class="tracking-note">Statut mis à jour en temps réel par le livreur.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ESPACE LIVREUR ============ -->
+  <section class="screen" data-screen="delivery" hidden>
+    <div class="role-banner livreur">
+      <div class="role-banner-top">
+        <div class="role-banner-icon"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="18.5" cy="17.5" r="2.5"/><path d="M5.5 17.5H10l3-6h3.5l2 6"/><path d="M14 8h2l1 3"/></svg></div>
+        <button class="icon-btn" id="logout-btn-delivery" aria-label="Déconnexion"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></button>
+      </div>
+      <h2>Espace livreur</h2>
+      <p>Connecté en tant que <strong id="delivery-name"></strong> · Départ : Hôpital Général de Douala</p>
+    </div>
+    <div class="list-wrap" id="delivery-orders"></div>
+  </section>
+
+  <!-- ============ ESPACE ADMIN ============ -->
+  <section class="screen" data-screen="admin" hidden>
+    <div class="role-banner admin">
+      <div class="role-banner-top">
+        <div class="role-banner-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></div>
+        <button class="icon-btn" id="logout-btn-admin" aria-label="Déconnexion"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></button>
+      </div>
+      <h2>Administration</h2>
+      <p>Vue d'ensemble de toute l'activité Mr. Shawarma</p>
+    </div>
+    <div class="admin-stats" id="admin-stats"></div>
+    <h3 class="section-label">Toutes les commandes</h3>
+    <div class="list-wrap" id="admin-orders"></div>
+  </section>
+
+  <!-- ============ NAV DU BAS ============ -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="nav-btn" data-nav="home" data-roles="client" aria-label="Accueil"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
+    <button class="nav-btn" data-nav="menu" data-roles="client" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg></button>
+    <button class="nav-btn" data-nav="cart" data-roles="client" aria-label="Panier"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="cart-badge" id="cart-badge" hidden>0</span></button>
+    <button class="nav-btn" data-nav="tracking" data-roles="client" aria-label="Suivi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></button>
+    <button class="nav-btn" data-nav="delivery" data-roles="livreur" aria-label="Livreur"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="18.5" cy="17.5" r="2.5"/><path d="M5.5 17.5H10l3-6h3.5l2 6"/><path d="M14 8h2l1 3"/></svg></button>
+    <button class="nav-btn" data-nav="admin" data-roles="admin" aria-label="Admin"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></button>
+  </nav>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   MR. SHAWARMA — frontend relié à une vraie API Laravel :
+   authentification par rôle (client / livreur / admin), base
+   de données partagée entre tous les acteurs, chaque rôle ne
+   voit que sa propre partie. Aucune passerelle de paiement
+   intégrée : espèces à la livraison, ou dépôt Orange Money /
+   MTN Mobile Money effectué par le client EN DEHORS de
+   l'application (l'app affiche juste le numéro à utiliser).
+   Double confirmation de livraison : le client confirme la
+   réception, puis le livreur clôture la commande.
+========================================================= */
+
+// Même origine que la page servie par Laravel (public/shawarma.html).
+// Si le frontend est hébergé ailleurs que le backend, remplacer par
+// l'URL complète de l'API.
+const API_BASE = "";
+
+const ICONS = {
+  shawarma: '<svg viewBox="0 0 24 24"><path d="M4 9 Q12 3 20 9 L18 18 Q12 21 6 18 Z"/><path d="M6 12h12"/><path d="M7 15h10"/></svg>',
+  boissons: '<svg viewBox="0 0 24 24"><path d="M7 3h10l-1 16a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2z"/><path d="M7 8h10"/><path d="M12 3v-1"/></svg>',
+  default: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>'
+};
+const CATEGORY_LABELS = { shawarma: "Shawarma", boissons: "Boissons" };
+const SIZE_PRICES = { Normal: 0, Grand: 500 };
+const JUICE_FLAVORS = ["Ananas", "Cocktail", "Gingembre", "Bissap", "Citron"];
+const LEGUMES = ["Salade", "Tomate", "Oignon", "Carottes"];
+const DELIVERY = { freeBelowKm: 1, base: 33, perExtraKm: 50 };
+const PROMO_QTY_PER_FREE = 10;
+const START_POINT = { name: "Hôpital Général de Douala", lat: 4.0653, lng: 9.7586 };
+const STATUS_META = {
+  received:         { step: 1, label: "Reçue" },
+  preparing:        { step: 2, label: "Préparation" },
+  delivering:       { step: 3, label: "En livraison" },
+  client_confirmed: { step: 4, label: "Confirmée" },
+  delivered:        { step: 5, label: "Livrée" }
+};
+// Actions que le LIVREUR peut déclencher lui-même. "delivering" est
+// volontairement absent : il faut que le client confirme la réception
+// (bouton dédié côté client) avant que le livreur puisse clôturer.
+const LIVREUR_NEXT_ACTION = {
+  received: "🍳 Démarrer la préparation",
+  preparing: "🛵 Partir en livraison",
+  client_confirmed: "✅ Confirmer la livraison"
+};
+const PAYMENT_LABELS = { cash: "Espèces à la livraison", orange_money: "Orange Money", mtn_momo: "MTN Mobile Money" };
+
+const AUTH_TOKEN_KEY = "mrshawarma_token";
+const AUTH_USER_KEY = "mrshawarma_user";
+const CART_KEY = "mrshawarma_cart_v3";
+const SEEN_ORDERS_KEY_PREFIX = "mrshawarma_seen_orders_";
+
+function safeGet(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+function safeSet(key, val) { try { localStorage.setItem(key, val); } catch (e) {} }
+function safeRemove(key) { try { localStorage.removeItem(key); } catch (e) {} }
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m])); }
+function loadCart() { try { return JSON.parse(safeGet(CART_KEY)) || []; } catch (e) { return []; } }
+function saveCart() { safeSet(CART_KEY, JSON.stringify(state.cart)); }
+
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+/* ---------------- NOTIFICATIONS (nouvelle commande pour livreur/admin) ----------------
+   Basées sur le polling déjà en place (pas de serveur de push) : ça fonctionne
+   tant que l'onglet est ouvert (au premier plan ou en arrière-plan). */
+function requestNotifPermission() {
+  if ("Notification" in window && Notification.permission === "default") {
+    Notification.requestPermission().catch(() => {});
+  }
+}
+function playNotifSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.value = 880;
+    gain.gain.setValueAtTime(0.001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+    osc.start(); osc.stop(ctx.currentTime + 0.4);
+  } catch (e) {}
+}
+function notifyNewOrder(order) {
+  showToast("🔔 Nouvelle commande " + order.ref + " !");
+  playNotifSound();
+  if ("Notification" in window && Notification.permission === "granted") {
+    try { new Notification("Nouvelle commande " + order.ref, { body: (order.client ? order.client.name + " · " : "") + order.total + " FCFA" }); } catch (e) {}
+  }
+}
+function getSeenRefs(key) { try { return JSON.parse(safeGet(SEEN_ORDERS_KEY_PREFIX + key)) || null; } catch (e) { return null; } }
+function saveSeenRefs(key, refs) { safeSet(SEEN_ORDERS_KEY_PREFIX + key, JSON.stringify(refs.slice(-200))); }
+/**
+ * Compare la liste de commandes reçue à la dernière liste connue pour ce
+ * rôle et notifie pour chaque référence jamais vue auparavant.
+ * `firstRun`=true (rien en mémoire) n'notifie rien : on ne veut pas
+ * spammer à l'ouverture de l'écran avec tout l'historique existant.
+ */
+function detectAndNotifyNewOrders(key, orders) {
+  const previous = getSeenRefs(key);
+  const currentRefs = orders.map(o => o.ref);
+  if (previous !== null) {
+    orders.filter(o => !previous.includes(o.ref)).forEach(notifyNewOrder);
+  }
+  saveSeenRefs(key, currentRefs);
+}
+
+/* ---------------- APPEL API ---------------- */
+async function api(path, options = {}) {
+  const headers = Object.assign({ "Content-Type": "application/json" }, options.headers || {});
+  if (state.token) headers.Authorization = "Bearer " + state.token;
+  const res = await fetch(API_BASE + path, Object.assign({}, options, { headers }));
+  let data = null;
+  try { data = await res.json(); } catch (e) {}
+  if (res.status === 401) {
+    logout();
+    throw new Error((data && data.error) || "Session expirée.");
+  }
+  if (!res.ok) throw new Error((data && data.error) || "Erreur réseau.");
+  return data;
+}
+
+/* ---------------- ETAT ---------------- */
+const state = {
+  currentScreen: "login",
+  token: safeGet(AUTH_TOKEN_KEY),
+  user: JSON.parse(safeGet(AUTH_USER_KEY) || "null"),
+  loginTab: "client",
+  clientMode: "register",
+  productsByCategory: {},
+  categories: [],
+  activeCategory: null,
+  currentItem: null,
+  customization: {},
+  qty: 1,
+  cart: loadCart(),
+  deliveryKm: null,
+  address: "",
+  addressCoords: null,
+  lastOrder: null,
+  pollTimer: null,
+  paymentMethods: [],
+  paymentMethod: "cash"
+};
+
+/* ---------------- NAVIGATION ---------------- */
+function roleAllowed(screen) {
+  const map = { home: "client", menu: "client", customize: "client", cart: "client", tracking: "client", delivery: "livreur", admin: "admin", login: null };
+  const required = map[screen];
+  if (!required) return true;
+  return state.user && (state.user.role === required || (required === "livreur" && state.user.role === "admin"));
+}
+function goTo(screenName) {
+  if (screenName !== "login" && !state.user) screenName = "login";
+  if (!roleAllowed(screenName)) screenName = defaultScreenForRole();
+  state.currentScreen = screenName;
+  document.querySelectorAll(".screen").forEach(s => { s.hidden = s.dataset.screen !== screenName; });
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.nav === screenName));
+  document.getElementById("bottom-nav").style.display = ["login", "customize"].includes(screenName) ? "none" : "flex";
+  const active = document.querySelector('.screen[data-screen="' + screenName + '"]');
+  if (active) { active.style.animation = "none"; void active.offsetWidth; active.style.animation = ""; }
+  stopPolling();
+  if (screenName === "menu") { loadProducts().then(() => { renderCategories(); renderProducts(); }); }
+  if (screenName === "cart") renderCart();
+  if (screenName === "tracking") { refreshTracking(); startPolling(refreshTracking, 3000); }
+  if (screenName === "delivery") { requestNotifPermission(); refreshDelivery(); startPolling(refreshDelivery, 3000); }
+  if (screenName === "admin") { requestNotifPermission(); refreshAdmin(); startPolling(refreshAdmin, 4000); }
+  if (screenName === "home") refreshHello();
+  window.scrollTo(0, 0);
+}
+function stopPolling() { if (state.pollTimer) { clearInterval(state.pollTimer); state.pollTimer = null; } }
+function startPolling(fn, ms) { state.pollTimer = setInterval(fn, ms); }
+function defaultScreenForRole() {
+  if (!state.user) return "login";
+  if (state.user.role === "admin") return "admin";
+  if (state.user.role === "livreur") return "delivery";
+  return "home";
+}
+document.addEventListener("click", (e) => {
+  const navEl = e.target.closest("[data-nav]");
+  if (navEl) goTo(navEl.dataset.nav);
+});
+function applyNavVisibility() {
+  const role = state.user ? state.user.role : null;
+  document.querySelectorAll(".nav-btn[data-roles]").forEach(btn => {
+    const roles = btn.dataset.roles.split(",");
+    btn.hidden = !role || !roles.includes(role);
+  });
+}
+
+/* ---------------- CONNEXION ---------------- */
+document.querySelectorAll("[data-login-tab]").forEach(tab => tab.addEventListener("click", () => {
+  state.loginTab = tab.dataset.loginTab;
+  document.querySelectorAll("[data-login-tab]").forEach(t => t.classList.toggle("active", t === tab));
+  document.getElementById("login-panel-client").hidden = state.loginTab !== "client";
+  document.getElementById("login-panel-staff").hidden = state.loginTab !== "staff";
+  document.getElementById("login-error").textContent = "";
+}));
+document.getElementById("client-mode-toggle").addEventListener("click", () => {
+  state.clientMode = state.clientMode === "register" ? "login" : "register";
+  document.getElementById("login-name").hidden = state.clientMode === "login";
+  document.getElementById("client-mode-text").textContent = state.clientMode === "register" ? "Déjà un compte ?" : "Nouveau client ?";
+  document.getElementById("client-mode-toggle").textContent = state.clientMode === "register" ? "Se connecter" : "Créer un compte";
+});
+async function handleLogin() {
+  const err = document.getElementById("login-error");
+  err.textContent = "";
+  try {
+    let data;
+    if (state.loginTab === "client") {
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value;
+      if (state.clientMode === "register") {
+        const name = document.getElementById("login-name").value.trim();
+        if (!name) { err.textContent = "Entre ton nom pour continuer."; return; }
+        data = await api("/api/auth/register", { method: "POST", body: JSON.stringify({ name, email, password }) });
+      } else {
+        data = await api("/api/auth/login", { method: "POST", body: JSON.stringify({ email, password }) });
+        if (data.user.role !== "client") { err.textContent = "Ce compte n'est pas un compte client."; return; }
+      }
+    } else {
+      const email = document.getElementById("staff-email").value.trim();
+      const password = document.getElementById("staff-password").value;
+      data = await api("/api/auth/login", { method: "POST", body: JSON.stringify({ email, password }) });
+      if (data.user.role === "client") { err.textContent = "Utilise l'onglet Client pour ce compte."; return; }
+    }
+    state.token = data.token;
+    state.user = data.user;
+    safeSet(AUTH_TOKEN_KEY, state.token);
+    safeSet(AUTH_USER_KEY, JSON.stringify(state.user));
+    applyNavVisibility();
+    goTo(defaultScreenForRole());
+  } catch (e) {
+    err.textContent = e.message;
+  }
+}
+document.getElementById("login-btn").addEventListener("click", handleLogin);
+function logout() {
+  state.token = null;
+  state.user = null;
+  safeRemove(AUTH_TOKEN_KEY);
+  safeRemove(AUTH_USER_KEY);
+  stopPolling();
+  applyNavVisibility();
+  goTo("login");
+}
+["logout-btn-home", "logout-btn-delivery", "logout-btn-admin"].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener("click", logout);
+});
+function refreshHello() {
+  const el = document.getElementById("home-hello");
+  if (el && state.user) el.textContent = "Bonjour " + state.user.name + " 👋";
+  const dn = document.getElementById("delivery-name");
+  if (dn && state.user) dn.textContent = state.user.name;
+}
+
+/* ---------------- EMBRES ---------------- */
+function spawnEmbers() {
+  const field = document.getElementById("ember-field");
+  if (!field) return;
+  for (let i = 0; i < 14; i++) {
+    const ember = document.createElement("span");
+    ember.className = "ember";
+    ember.style.left = Math.random() * 100 + "%";
+    ember.style.setProperty("--drift", (Math.random() * 40 - 20) + "px");
+    ember.style.animationDuration = (3 + Math.random() * 3) + "s";
+    ember.style.animationDelay = (Math.random() * 4) + "s";
+    field.appendChild(ember);
+  }
+}
+
+/* ---------------- DISTANCE / GÉOLOCALISATION ----------------
+   1) Recherche d'adresse avec suggestions (Nominatim, biaisé sur Douala)
+      au lieu de prendre aveuglément le premier résultat.
+   2) Distance calculée par itinéraire routier réel (OSRM), avec repli
+      sur une estimation à vol d'oiseau x1.3 si le service est indisponible. */
+const DOUALA_VIEWBOX = "9.55,4.20,9.85,3.90"; // left,top,right,bottom (lon,lat,lon,lat)
+
+function haversineKm(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+function deliveryFeeFor(km) {
+  if (km === null || km === undefined || isNaN(km)) return null;
+  if (km < DELIVERY.freeBelowKm) return 0;
+  return DELIVERY.base + Math.ceil(km - DELIVERY.freeBelowKm) * DELIVERY.perExtraKm;
+}
+/** Distance routière réelle via OSRM ; repli sur une estimation si indisponible. */
+async function computeRouteKm(destCoords) {
+  try {
+    const url = "https://router.project-osrm.org/route/v1/driving/" + START_POINT.lng + "," + START_POINT.lat + ";" + destCoords.lng + "," + destCoords.lat + "?overview=false";
+    const res = await fetch(url);
+    const json = await res.json();
+    if (json && json.code === "Ok" && json.routes && json.routes[0]) {
+      return { km: json.routes[0].distance / 1000, method: "route" };
+    }
+    throw new Error("Pas d'itinéraire");
+  } catch (e) {
+    const straight = haversineKm(START_POINT.lat, START_POINT.lng, destCoords.lat, destCoords.lng);
+    return { km: straight * 1.3, method: "estimate" };
+  }
+}
+function applyDistance(km, coords, sourceMsg, method) {
+  state.deliveryKm = Math.round(km * 10) / 10;
+  if (coords) state.addressCoords = coords;
+  const statusEl = document.getElementById("loc-status-cart");
+  const methodLabel = method === "route" ? "distance par la route" : "estimation à vol d'oiseau";
+  if (statusEl) statusEl.textContent = sourceMsg + " · " + state.deliveryKm + " km (" + methodLabel + ") depuis " + START_POINT.name;
+  updateMapsLink();
+  updateCartSummary();
+}
+async function fetchAddressSuggestions(query) {
+  const url = "https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=cm&viewbox=" + DOUALA_VIEWBOX + "&q=" + encodeURIComponent(query + ", Douala, Cameroun");
+  const res = await fetch(url);
+  const json = await res.json();
+  return (json || []).map(r => ({ label: r.display_name, lat: parseFloat(r.lat), lng: parseFloat(r.lon) }));
+}
+function hideSuggestions() {
+  const box = document.getElementById("address-suggestions");
+  box.hidden = true; box.innerHTML = "";
+}
+async function selectSuggestion(s) {
+  document.getElementById("address-input").value = s.label;
+  state.address = s.label;
+  hideSuggestions();
+  const statusEl = document.getElementById("loc-status-cart");
+  statusEl.textContent = "Calcul de l'itinéraire…";
+  const { km, method } = await computeRouteKm(s);
+  applyDistance(km, { lat: s.lat, lng: s.lng }, "Position confirmée", method);
+}
+function renderSuggestions(list) {
+  const box = document.getElementById("address-suggestions");
+  if (!list.length) { hideSuggestions(); return; }
+  box.hidden = false;
+  box.innerHTML = list.map((s, i) => '<button type="button" class="address-suggestion-item" data-idx="' + i + '">📍 ' + esc(s.label) + '</button>').join("");
+  box.querySelectorAll("[data-idx]").forEach(btn => btn.addEventListener("click", () => selectSuggestion(list[Number(btn.dataset.idx)])));
+}
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+const debouncedSuggest = debounce(async (query) => {
+  if (query.trim().length < 6) { hideSuggestions(); return; }
+  try { renderSuggestions(await fetchAddressSuggestions(query.trim())); } catch (e) { hideSuggestions(); }
+}, 700);
+async function geocodeAddress() {
+  const addr = document.getElementById("address-input").value.trim();
+  const statusEl = document.getElementById("loc-status-cart");
+  if (addr.length < 8) { statusEl.textContent = "Décris ta position en détail (quartier, rue, repère…)."; return; }
+  state.address = addr;
+  statusEl.textContent = "Recherche de ta position…";
+  try {
+    const list = await fetchAddressSuggestions(addr);
+    if (!list.length) throw new Error("introuvable");
+    if (list.length > 1) {
+      renderSuggestions(list);
+      statusEl.textContent = "Plusieurs résultats trouvés — choisis le bon ci-dessous.";
+      return;
+    }
+    hideSuggestions();
+    statusEl.textContent = "Calcul de l'itinéraire…";
+    const { km, method } = await computeRouteKm(list[0]);
+    applyDistance(km, { lat: list[0].lat, lng: list[0].lng }, "Position trouvée", method);
+  } catch (e) {
+    statusEl.textContent = "Géocodage indisponible — saisis la distance manuellement ci-dessous.";
+  }
+}
+function useGps() {
+  const statusEl = document.getElementById("loc-status-cart");
+  if (!("geolocation" in navigator)) { statusEl.textContent = "GPS non disponible — saisis ta position détaillée."; return; }
+  statusEl.textContent = "Localisation en cours…";
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+    hideSuggestions();
+    if (!state.address) {
+      try {
+        const res = await fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + coords.lat + "&lon=" + coords.lng);
+        const json = await res.json();
+        if (json && json.display_name) {
+          state.address = json.display_name;
+          document.getElementById("address-input").value = json.display_name;
+        }
+      } catch (e) {}
+    }
+    statusEl.textContent = "Calcul de l'itinéraire…";
+    const { km, method } = await computeRouteKm(coords);
+    applyDistance(km, coords, "Position GPS détectée", method);
+  }, () => { statusEl.textContent = "Position refusée — décris ta position ou saisis la distance."; }, { enableHighAccuracy: true, timeout: 8000 });
+}
+function mapsHrefFor(dest) {
+  return "https://www.google.com/maps/dir/?api=1&origin=" + START_POINT.lat + "," + START_POINT.lng + "&destination=" + dest;
+}
+function updateMapsLink() {
+  const link = document.getElementById("maps-link");
+  if (!link) return;
+  const dest = state.addressCoords ? (state.addressCoords.lat + "," + state.addressCoords.lng) : (state.address ? encodeURIComponent(state.address + ", Douala, Cameroun") : "");
+  if (!dest) { link.hidden = true; return; }
+  link.hidden = false;
+  link.href = mapsHrefFor(dest);
+}
+
+/* ---------------- MENU (produits chargés depuis l'API) ---------------- */
+async function loadProducts() {
+  const data = await api("/api/products");
+  state.productsByCategory = data.products;
+  state.categories = data.categories;
+  if (!state.activeCategory || !state.categories.includes(state.activeCategory)) {
+    state.activeCategory = state.categories[0] || null;
+  }
+}
+function renderCategories() {
+  const grid = document.getElementById("category-grid");
+  grid.innerHTML = state.categories.map(cat =>
+    '<button class="category-chip ' + (cat === state.activeCategory ? "active" : "") + '" data-cat="' + cat + '">' +
+      '<span class="chip-ring">' + (ICONS[cat] || ICONS.default) + '</span><span class="chip-label">' + (CATEGORY_LABELS[cat] || cat) + '</span></button>'
+  ).join("");
+  grid.querySelectorAll("[data-cat]").forEach(btn => btn.addEventListener("click", () => {
+    state.activeCategory = btn.dataset.cat;
+    renderCategories(); renderProducts();
+  }));
+}
+function renderProducts() {
+  const list = document.getElementById("product-list");
+  const cat = state.activeCategory;
+  document.getElementById("products-title").textContent = CATEGORY_LABELS[cat] ? "Nos " + CATEGORY_LABELS[cat].toLowerCase() : "Nos produits";
+  const items = state.productsByCategory[cat] || [];
+  list.innerHTML = items.map(p =>
+    '<div class="product-card"><div class="product-thumb">' + (ICONS[cat] || ICONS.default) + '</div>' +
+    '<div class="product-info"><h4>' + esc(p.name) + '</h4><p>' + esc(p.description || "") + '</p><div class="product-price">' + p.basePrice + ' FCFA</div></div>' +
+    '<button class="product-add" data-open-product="' + p.id + '" aria-label="Personnaliser ' + esc(p.name) + '">+</button></div>'
+  ).join("");
+  list.querySelectorAll("[data-open-product]").forEach(btn => btn.addEventListener("click", () => openCustomize(btn.dataset.openProduct)));
+}
+
+/* ---------------- PERSONNALISATION ---------------- */
+function openCustomize(productId) {
+  const cat = state.activeCategory;
+  const product = (state.productsByCategory[cat] || []).find(p => p.id === productId);
+  state.currentItem = Object.assign({}, product, { category: cat });
+  state.qty = 1;
+  state.customization = cat === "shawarma"
+    ? { taille: "Normal", legumes: [], sauce: 2, piment: 1, ketchup: false }
+    : (product.hasFlavors ? { saveur: JUICE_FLAVORS[0] } : {});
+  document.getElementById("customize-title").textContent = product.name;
+  renderCustomizeBody();
+  updateItemTotal();
+  goTo("customize");
+}
+function sauceLabel(l) { return ["Sans sauce", "Léger", "Normal", "Généreux"][l]; }
+function pimentLabel(l) { return l === 0 ? "Aucun" : "Piment ×" + l; }
+function renderCustomizeBody() {
+  const body = document.getElementById("customize-body");
+  const c = state.customization;
+  if (state.currentItem.category === "shawarma") {
+    body.innerHTML =
+      '<div class="opt-group"><h4>Taille</h4><div class="pill-row">' +
+        Object.keys(SIZE_PRICES).map(s =>
+          '<button class="pill ' + (c.taille === s ? "selected" : "") + '" data-size="' + s + '">' + s + (SIZE_PRICES[s] ? " +" + SIZE_PRICES[s] : "") + '</button>'
+        ).join("") +
+      '</div></div>' +
+      '<div class="opt-group"><h4>Légumes / garnitures</h4>' +
+        LEGUMES.map(l =>
+          '<div class="check-row"><input type="checkbox" id="leg-' + l + '" data-legume="' + l + '" ' + (c.legumes.includes(l) ? "checked" : "") + '><label for="leg-' + l + '">' + l + '</label></div>'
+        ).join("") +
+      '</div>' +
+      '<div class="opt-group"><h4>Niveau de sauce</h4><div class="slider-wrap"><input type="range" min="0" max="3" value="' + c.sauce + '" id="sauce-slider"><span class="slider-flames" id="sauce-label">' + sauceLabel(c.sauce) + '</span></div></div>' +
+      '<div class="opt-group"><h4>Niveau de piment</h4><div class="slider-wrap"><input type="range" min="0" max="3" value="' + c.piment + '" id="piment-slider"><span class="slider-flames" id="piment-label">' + pimentLabel(c.piment) + '</span></div></div>' +
+      '<div class="opt-group"><div class="toggle-row"><h4 style="margin:0">Ajouter du ketchup</h4><label class="switch"><input type="checkbox" id="ketchup-toggle" ' + (c.ketchup ? "checked" : "") + '><span class="slider-toggle"></span></label></div></div>';
+    body.querySelectorAll("[data-size]").forEach(btn => btn.addEventListener("click", () => { state.customization.taille = btn.dataset.size; renderCustomizeBody(); updateItemTotal(); }));
+    body.querySelectorAll("[data-legume]").forEach(chk => chk.addEventListener("change", () => {
+      const l = chk.dataset.legume;
+      if (chk.checked) c.legumes.push(l); else c.legumes = c.legumes.filter(x => x !== l);
+    }));
+    body.querySelector("#sauce-slider").addEventListener("input", (e) => { c.sauce = Number(e.target.value); document.getElementById("sauce-label").textContent = sauceLabel(c.sauce); });
+    body.querySelector("#piment-slider").addEventListener("input", (e) => { c.piment = Number(e.target.value); document.getElementById("piment-label").textContent = pimentLabel(c.piment); });
+    body.querySelector("#ketchup-toggle").addEventListener("change", (e) => { c.ketchup = e.target.checked; });
+  } else if (state.currentItem.hasFlavors) {
+    body.innerHTML = '<div class="opt-group"><h4>Saveur du jus</h4><div class="pill-row">' +
+      JUICE_FLAVORS.map(f => '<button class="pill ' + (c.saveur === f ? "selected" : "") + '" data-flavor="' + f + '">' + f + '</button>').join("") +
+      '</div></div>';
+    body.querySelectorAll("[data-flavor]").forEach(btn => btn.addEventListener("click", () => { state.customization.saveur = btn.dataset.flavor; renderCustomizeBody(); }));
+  } else {
+    body.innerHTML = '<div class="opt-group"><h4>Prêt à commander</h4><p style="margin:0;font-size:12.5px;color:var(--text-dim);">Ce produit ne propose pas d\'option supplémentaire — choisis juste la quantité ci-dessous.</p></div>';
+  }
+}
+function unitPrice() {
+  let price = state.currentItem.basePrice;
+  if (state.currentItem.category === "shawarma") price += SIZE_PRICES[state.customization.taille];
+  return price;
+}
+function updateItemTotal() {
+  document.getElementById("item-total-price").textContent = unitPrice() * state.qty;
+  document.getElementById("qty-value").textContent = state.qty;
+}
+document.getElementById("qty-minus").addEventListener("click", () => { state.qty = Math.max(1, state.qty - 1); updateItemTotal(); });
+document.getElementById("qty-plus").addEventListener("click", () => { state.qty += 1; updateItemTotal(); });
+document.getElementById("add-to-cart-btn").addEventListener("click", () => {
+  const c = state.customization;
+  const item = state.currentItem;
+  const summary = item.category === "shawarma"
+    ? c.taille + " · " + (c.legumes.length ? c.legumes.join(", ") : "sans légumes") + " · Sauce: " + sauceLabel(c.sauce) + " · Piment: " + c.piment + "/3" + (c.ketchup ? " · Ketchup" : "")
+    : (item.hasFlavors ? "Saveur : " + c.saveur : "Boisson standard");
+  state.cart.push({
+    cartId: item.id + "-" + Date.now(),
+    productId: item.id,
+    name: item.name,
+    category: item.category,
+    unitPrice: unitPrice(),
+    qty: state.qty,
+    summary: summary,
+    customization: Object.assign({}, c)
+  });
+  saveCart();
+  updateCartBadge();
+  goTo("cart");
+});
+
+/* ---------------- PANIER (calcul indicatif — le serveur recalcule tout à la commande) ---------------- */
+function subtotal() { return state.cart.reduce((s, i) => s + i.unitPrice * i.qty, 0); }
+function promoInfo() {
+  const shawItems = state.cart.filter(i => i.category === "shawarma");
+  const qty = shawItems.reduce((n, i) => n + i.qty, 0);
+  const free = Math.floor(qty / PROMO_QTY_PER_FREE);
+  if (!free || !shawItems.length) return { free: 0, amount: 0, qty: qty };
+  return { free: free, amount: free * Math.min.apply(null, shawItems.map(i => i.unitPrice)), qty: qty };
+}
+function currentDistance() {
+  return (state.deliveryKm && state.deliveryKm > 0) ? state.deliveryKm : null;
+}
+function deliveryFee() { return deliveryFeeFor(currentDistance()); }
+function updateCartSummary() {
+  const sub = subtotal();
+  const promo = promoInfo();
+  const fee = deliveryFee();
+  const distance = currentDistance();
+  document.getElementById("sum-subtotal").textContent = sub + " FCFA";
+  document.getElementById("row-promo").hidden = promo.free === 0;
+  if (promo.free) {
+    document.getElementById("sum-promo-label").textContent = "Shawarma offert 🎁 ×" + promo.free;
+    document.getElementById("sum-promo").textContent = "−" + promo.amount + " FCFA";
+  }
+  document.getElementById("sum-delivery").textContent = fee === null ? "— FCFA" : (fee === 0 ? "Gratuit 🎉" : fee + " FCFA");
+  document.getElementById("sum-distance").textContent = distance !== null ? "(" + distance + " km)" : "";
+  document.getElementById("sum-total").textContent = (sub - promo.amount + (fee || 0)) + " FCFA";
+  const hint = document.getElementById("promo-hint");
+  if (promo.free > 0) hint.textContent = "🎉 Promo appliquée : " + promo.free + " shawarma offert !";
+  else if (promo.qty > 0) hint.textContent = "🎁 Plus que " + (PROMO_QTY_PER_FREE - (promo.qty % PROMO_QTY_PER_FREE)) + " shawarma(s) pour 1 offert !";
+  else hint.textContent = "🎁 1 shawarma offert dès 10 shawarmas achetés";
+  if (state.paymentMethods.length) updateDepositBox();
+}
+async function loadPaymentMethods() {
+  if (state.paymentMethods.length) return;
+  try {
+    const data = await api("/api/payment-methods");
+    state.paymentMethods = data.methods;
+  } catch (e) {
+    state.paymentMethods = [{ id: "cash", label: "Espèces à la livraison" }];
+  }
+}
+function renderPaymentMethods() {
+  const wrap = document.getElementById("payment-methods");
+  wrap.innerHTML = state.paymentMethods.map(m =>
+    '<button type="button" class="payment-option ' + (state.paymentMethod === m.id ? "selected" : "") + '" data-payment="' + m.id + '"><span class="payment-radio"></span>' + esc(m.label) + '</button>'
+  ).join("");
+  wrap.querySelectorAll("[data-payment]").forEach(btn => btn.addEventListener("click", () => {
+    state.paymentMethod = btn.dataset.payment;
+    renderPaymentMethods();
+    updateDepositBox();
+  }));
+  updateDepositBox();
+}
+function updateDepositBox() {
+  const box = document.getElementById("deposit-box");
+  const cashNote = document.getElementById("cash-note");
+  const method = state.paymentMethods.find(m => m.id === state.paymentMethod);
+  if (!method || method.id === "cash") {
+    box.hidden = true;
+    cashNote.textContent = "Paiement en espèces à la livraison.";
+    return;
+  }
+  box.hidden = false;
+  box.innerHTML = "Effectue le dépôt de <strong>" + (subtotal() - promoInfo().amount + (deliveryFee() || 0)) + " FCFA</strong> au numéro <strong>" + esc(method.depositNumber) + "</strong> (" + esc(method.depositName) + ") avant la livraison.<br>Le dépôt se fait en dehors de l'application — le livreur vérifiera la réception à l'arrivée.";
+  cashNote.textContent = "Paiement par " + method.label + " — dépôt à faire séparément (voir ci-dessus).";
+}
+function renderCart() {
+  const itemsEl = document.getElementById("cart-items");
+  const emptyEl = document.getElementById("empty-cart");
+  const deliveryBox = document.getElementById("delivery-box");
+  const paymentBox = document.getElementById("payment-box");
+  const summaryBox = document.getElementById("cart-summary");
+  if (state.cart.length === 0) {
+    itemsEl.innerHTML = ""; emptyEl.hidden = false; deliveryBox.hidden = true; paymentBox.hidden = true; summaryBox.hidden = true; return;
+  }
+  emptyEl.hidden = true; deliveryBox.hidden = false; paymentBox.hidden = false; summaryBox.hidden = false;
+  if (state.address) document.getElementById("address-input").value = state.address;
+  itemsEl.innerHTML = state.cart.map(item =>
+    '<div class="cart-item"><div class="cart-item-body"><strong>' + item.qty + ' × ' + esc(item.name) + '</strong><p>' + esc(item.summary) + '</p>' +
+    '<div class="cart-item-price">' + (item.unitPrice * item.qty) + ' FCFA</div>' +
+    '<button class="cart-item-remove" data-remove="' + item.cartId + '">Retirer</button></div></div>'
+  ).join("");
+  itemsEl.querySelectorAll("[data-remove]").forEach(btn => btn.addEventListener("click", () => {
+    state.cart = state.cart.filter(i => i.cartId !== btn.dataset.remove);
+    saveCart(); updateCartBadge(); renderCart();
+  }));
+  updateMapsLink();
+  updateCartSummary();
+  loadPaymentMethods().then(renderPaymentMethods);
+}
+document.getElementById("geocode-btn").addEventListener("click", geocodeAddress);
+document.getElementById("locate-btn").addEventListener("click", useGps);
+document.getElementById("address-input").addEventListener("input", (e) => {
+  state.address = e.target.value.trim();
+  debouncedSuggest(e.target.value);
+});
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#address-suggestions") && !e.target.closest("#address-input")) hideSuggestions();
+});
+
+document.getElementById("checkout-btn").addEventListener("click", async () => {
+  const statusEl = document.getElementById("loc-status-cart");
+  const addr = document.getElementById("address-input").value.trim();
+  if (!addr) { statusEl.textContent = "Ajoute ta position détaillée pour que le livreur te trouve."; document.getElementById("address-input").focus(); return; }
+  const km = currentDistance();
+  if (deliveryFeeFor(km) === null) { statusEl.textContent = "Utilise 📍 Ma position GPS ou 🧮 Calculer la distance pour continuer."; document.getElementById("address-input").focus(); return; }
+  const btn = document.getElementById("checkout-btn");
+  btn.disabled = true; btn.textContent = "Envoi de la commande…";
+  try {
+    const payload = {
+      items: state.cart.map(i => ({ productId: i.productId, qty: i.qty, customization: i.customization })),
+      address: addr,
+      addressCoords: state.addressCoords,
+      distanceKm: km,
+      paymentMethod: state.paymentMethod
+    };
+    const data = await api("/api/orders", { method: "POST", body: JSON.stringify(payload) });
+    state.lastOrder = data.order;
+    state.cart = [];
+    state.paymentMethod = "cash";
+    saveCart();
+    updateCartBadge();
+    showToast("Commande " + data.order.ref + " envoyée !");
+    goTo("tracking");
+  } catch (e) {
+    statusEl.textContent = e.message;
+  } finally {
+    btn.disabled = false; btn.innerHTML = 'Commander';
+  }
+});
+function updateCartBadge() {
+  const badge = document.getElementById("cart-badge");
+  const count = state.cart.reduce((n, i) => n + i.qty, 0);
+  badge.hidden = count === 0;
+  badge.textContent = count;
+}
+
+/* ---------------- SUIVI CLIENT (temps réel via polling de l'API) ---------------- */
+let trackingOrderRef = null;
+async function refreshTracking() {
+  let order = null;
+  try {
+    const data = await api("/api/orders/mine");
+    order = data.orders && data.orders[0] ? data.orders[0] : null;
+  } catch (e) { return; }
+  const noOrder = document.getElementById("no-order");
+  const content = document.getElementById("order-tracking-content");
+  if (!order) { noOrder.hidden = false; content.hidden = true; return; }
+  noOrder.hidden = true; content.hidden = false;
+  trackingOrderRef = order.ref;
+  document.getElementById("order-ref-number").textContent = order.ref;
+  document.getElementById("order-time").textContent = new Date(order.placedAt).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+  document.getElementById("order-address").textContent = "📍 " + order.address + " · " + (order.distanceKm != null ? order.distanceKm + " km" : "—") + " · " + order.total + " FCFA (" + (PAYMENT_LABELS[order.paymentMethod] || "Espèces") + ")";
+  const mapsLink = document.getElementById("order-maps-link");
+  const dest = order.addressCoords ? (order.addressCoords.lat + "," + order.addressCoords.lng) : encodeURIComponent(order.address + ", Douala, Cameroun");
+  mapsLink.hidden = false;
+  mapsLink.href = "https://www.google.com/maps/search/?api=1&query=" + dest;
+  const step = STATUS_META[order.status].step;
+  document.querySelectorAll(".track-step").forEach(el => {
+    const s = Number(el.dataset.step);
+    el.classList.toggle("done", s < step);
+    el.classList.toggle("current", s === step);
+  });
+  document.getElementById("confirm-banner").hidden = order.status !== "delivering";
+  document.getElementById("wait-banner").hidden = order.status !== "client_confirmed";
+}
+document.getElementById("confirm-receipt-btn").addEventListener("click", async () => {
+  if (!trackingOrderRef) return;
+  const btn = document.getElementById("confirm-receipt-btn");
+  btn.disabled = true; btn.textContent = "Confirmation…";
+  try {
+    await api("/api/orders/" + encodeURIComponent(trackingOrderRef) + "/confirm-receipt", { method: "PATCH" });
+    showToast("Merci ! En attente de la clôture par le livreur.");
+    refreshTracking();
+  } catch (e) {
+    showToast(e.message);
+  } finally {
+    btn.disabled = false; btn.innerHTML = "✅ J'ai reçu ma commande";
+  }
+});
+
+/* ---------------- ESPACE LIVREUR ---------------- */
+function orderCardHTML(o, withAction) {
+  const meta = STATUS_META[o.status];
+  const next = LIVREUR_NEXT_ACTION[o.status];
+  const dest = o.addressCoords ? (o.addressCoords.lat + "," + o.addressCoords.lng) : encodeURIComponent(o.address + ", Douala, Cameroun");
+  const paymentLabel = PAYMENT_LABELS[o.paymentMethod] || "Espèces à la livraison";
+  let actionZone = "";
+  if (withAction) {
+    if (o.status === "delivering") {
+      actionZone = '<p style="color:#2B5EA7;font-weight:800;">⏳ En attente de confirmation du client</p>';
+    } else if (next) {
+      actionZone = '<button class="btn-action" data-order-action="' + o.ref + '">' + next + '</button>';
+    }
+  }
+  return '<div class="order-card st-' + o.status + '">' +
+    '<div class="order-card-head"><strong>' + o.ref + '</strong><span class="status-badge status-' + o.status + '">' + meta.label + '</span></div>' +
+    (o.client ? '<p>👤 ' + esc(o.client.name) + ' · ' + esc(o.client.email) + '</p>' : '') +
+    '<p>📍 ' + esc(o.address) + ' · ' + (o.distanceKm != null ? o.distanceKm + " km" : "—") + '</p>' +
+    '<p>🧾 ' + o.items.map(i => i.qty + " × " + esc(i.name)).join(", ") + '</p>' +
+    '<p>💰 ' + o.total + ' FCFA' + (o.promoFree ? ' · 🎁 ' + o.promoFree + ' offert(s)' : '') + '</p>' +
+    '<span class="payment-tag">💳 ' + esc(paymentLabel) + '</span>' +
+    '<a class="maps-link" target="_blank" rel="noopener" href="' + mapsHrefFor(dest) + '">🗺️ Itinéraire Google Maps</a>' +
+    actionZone +
+    (o.status === "delivered" ? '<p style="color:var(--sage);font-weight:800;">✅ Livraison confirmée</p>' : '') +
+  '</div>';
+}
+async function refreshDelivery() {
+  const list = document.getElementById("delivery-orders");
+  let orders = [];
+  try { orders = (await api("/api/orders/active")).orders; } catch (e) { return; }
+  detectAndNotifyNewOrders("livreur", orders);
+  if (!orders.length) { list.innerHTML = '<div class="empty-cart"><p>Aucune commande pour le moment.</p></div>'; return; }
+  list.innerHTML = orders.map(o => orderCardHTML(o, true)).join("");
+  list.querySelectorAll("[data-order-action]").forEach(btn => btn.addEventListener("click", async () => {
+    btn.disabled = true;
+    try {
+      await api("/api/orders/" + encodeURIComponent(btn.dataset.orderAction) + "/status", { method: "PATCH" });
+      refreshDelivery();
+    } catch (e) { showToast(e.message); btn.disabled = false; }
+  }));
+}
+
+/* ---------------- ESPACE ADMIN ---------------- */
+async function refreshAdmin() {
+  let stats, orders;
+  try {
+    stats = (await api("/api/orders/stats/summary"));
+    orders = (await api("/api/orders")).orders;
+  } catch (e) { return; }
+  detectAndNotifyNewOrders("admin", orders);
+  document.getElementById("admin-stats").innerHTML =
+    '<div class="stat-card"><strong>' + stats.totalOrders + '</strong><span>Commandes</span></div>' +
+    '<div class="stat-card"><strong>' + stats.totalRevenue + '</strong><span>CA total (FCFA)</span></div>' +
+    '<div class="stat-card"><strong>' + stats.delivered + '</strong><span>Livraisons OK</span></div>' +
+    '<div class="stat-card"><strong>' + stats.inProgress + '</strong><span>En cours</span></div>';
+  const list = document.getElementById("admin-orders");
+  if (!orders.length) { list.innerHTML = '<div class="empty-cart"><p>Aucune commande enregistrée.</p></div>'; return; }
+  list.innerHTML = orders.map(o => orderCardHTML(o, false)).join("");
+}
+
+/* ---------------- INIT ---------------- */
+updateCartBadge();
+spawnEmbers();
+applyNavVisibility();
+goTo(state.user ? defaultScreenForRole() : "login");
+
+/* ---------------- PWA — enregistrement du service worker ---------------- */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
